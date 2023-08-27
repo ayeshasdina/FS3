@@ -28,8 +28,8 @@ import torch.nn.functional as F
 from pytorch_metric_learning.distances import DotProductSimilarity
 
 # model_path = "pretrained_models"
-model_path = "/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/pretrained_weights_ehms/"
-input_path = "/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/input/"
+model_path = "/pretrain/" ## change the directory in case you have folder stracture 
+input_path = "/dataset/" ## change the directory in case you have folder stracture 
 
 
 model_name = "Tabmlp_EM70.pt"
