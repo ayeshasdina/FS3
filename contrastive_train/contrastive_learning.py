@@ -33,8 +33,8 @@ input_path = "/dataset/" ## change the directory in case you have folder stractu
 
 
 model_name = "Tabmlp_EM70.pt"
-# trained_model_name = "Tabnet_centroid30.pt"
-trained_model_name = "Datatabmlp5_models/tabmlp_ran5_8.pt"
+
+trained_model_name = "tabmlp_ran5.pt" ## change it accordingly if you want
 num_sample = 5
 batch_size = 5
 epoch_num = 100
@@ -43,7 +43,6 @@ wd = 1e-6
 #debug = False
 patience = 30
 
-print("tabmlp_ran5_3.pt")
 
 train_file = "trainRawData.csv"
 valtest_file = "valtestRawData.csv"
