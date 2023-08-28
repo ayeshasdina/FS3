@@ -39,7 +39,7 @@ y_test = pd.read_table(os.path.join(label_path, "y_test.csv"), sep = ',',index_c
 class_size = np.array(y_train.value_counts()) 
 print(class_size)
 #### select some percentage of samples
-print("model:X_trainp2_2.pkl")
+
 train = pd.concat([X_train,y_train], axis=1)
 percentage = 0.2
 print("percentage:",percentage)
@@ -110,25 +110,23 @@ print(class_size)
 print("K",k)
 votes = y_train[I]
 votes_test = y_train[I_test]
-predictions = [np.argmax((np.bincount(x, minlength=2) / class_size.astype(np.float32))) for x in votes]
-predictions_test = [np.argmax((np.bincount(x, minlength=2) / class_size.astype(np.float32))) for x in votes_test]
-# weight = np.array([0.92, 0.93,0.99, 0.98,  0.99])
-# weight = np.array([0.9893, 0.9718])
-# print("weight", weight)
-# predictions = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes]
-# predictions_test = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes_test]
+
+
+weight = np.array([0.9893, 0.9718]) ## precompute the weights
+print("weight", weight)
+predictions = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes]
+predictions_test = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes_test]
 
 # print(votes[:,2])
-report = classification_report(y_valtest, predictions, digits=4, output_dict=True)
-report = pd.DataFrame(report).transpose()
-print("weight-10",report)
+# report = classification_report(y_valtest, predictions, digits=4, output_dict=True)
+# report = pd.DataFrame(report).transpose()
+# print("weight-10",report)
 
 report = classification_report(y_test, predictions_test, digits=4, output_dict=True)
 report = pd.DataFrame(report).transpose()
 # report = report.append(k)
 print("wustl-Tabmlp5_1",report)
 report.to_csv("model2_20_classesize.csv")
-MCC = matthews_corrcoef(y_test, predictions_test)
-print("MCC", MCC)
+
 
 
