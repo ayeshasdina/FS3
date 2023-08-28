@@ -11,9 +11,9 @@ import numpy as np
 import pickle5 as pickle
 from sklearn.preprocessing import LabelEncoder
 
-from sklearn.metrics import accuracy_score
-from imblearn.combine import SMOTEENN
-from imblearn.under_sampling import EditedNearestNeighbours
+#from sklearn.metrics import accuracy_score
+#from imblearn.combine import SMOTEENN
+#from imblearn.under_sampling import EditedNearestNeighbours
 
 #### KNN dependancies
 from sklearn.metrics import classification_report, confusion_matrix, cohen_kappa_score, matthews_corrcoef
