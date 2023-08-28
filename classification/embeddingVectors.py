@@ -47,8 +47,8 @@ class MyModel(nn.Module):
         return x
 
 # input_path = "/Users/dina/Documents/Cyber_security/classification/BoT-IoT/Code_2/pickle_Data/input"
-input_path = "/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/input/"
-model_path = "/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/contrastive_learning/random_5/Datatabmlp5_models/"
+input_path = "/dataset/"
+#model_path = "/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/contrastive_learning/random_5/Datatabmlp5_models/"
 model_name = "tabmlp_ran5_5.pt"
 print("tabmlp_ran5_5.pt")
 
@@ -109,12 +109,10 @@ def load_model():
     
 
     
-    #### phase 1
-    # contrastive_denoising_model = torch.load("pretrained_weights/encoder_decoder_model.pt")
-    # pretrained_model = contrastive_denoising_model.encoder
+
     ##### phase2 pretrained encoder
-    # model = torch.load("phase2_model.pt") # phase2_model_val10.pt
-    model = torch.load(os.path.join(model_path,model_name),map_location= torch.device('cpu'))
+    
+    model = torch.load(os.path.join(model_name),map_location= torch.device('cpu'))
     pretrained_model = model.features1
     print(pretrained_model)
     #Train
@@ -141,9 +139,9 @@ def load_model():
     X_vec_val = pd.DataFrame.from_records(X_vec_val)
     X_vec_test = pd.DataFrame.from_records(X_vec_test)
     
-    X_vec.to_pickle("Datatabmlp5/X_trainp2_5.pkl")
-    X_vec_val.to_pickle("Datatabmlp5/X_valtestp2_5.pkl")
-    X_vec_test.to_pickle("Datatabmlp5/X_testp2_5.pkl")
+    X_vec.to_pickle("X_trainp2_5.pkl")
+    X_vec_val.to_pickle("X_valtestp2_5.pkl")
+    X_vec_test.to_pickle("X_testp2_5.pkl")
 
     return(X_vec,y_train,X_vec_test,y_test)
 
@@ -152,7 +150,7 @@ def load_model():
 if __name__ == "__main__":
     X_train,y_train,X_test,y_test = load_model()
     print("loading KNN...")
-    # KNN(X_train,y_train,X_test,y_test)
+    
     
     
     
