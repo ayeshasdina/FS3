@@ -24,15 +24,12 @@ label_path = "dataset/" ### according to the file structure
 ### open embedded vectors
 with open( "X_trainp2_2.pkl", "rb") as fh:
   X_train = pickle.load(fh)
-  
-with open( "X_valtestp2_2.pkl", "rb") as fh:
-  X_valtest = pickle.load(fh)
-  
+   
 with open( "X_testp2_2.pkl", "rb") as fh:
   X_test = pickle.load(fh) 
 
 y_train = pd.read_table(os.path.join(label_path, "y_train.csv"), sep = ',',index_col = 0)
-y_valtest = pd.read_table(os.path.join(label_path, "y_valtest.csv"), sep = ',',index_col = 0)
+#y_valtest = pd.read_table(os.path.join(label_path, "y_valtest.csv"), sep = ',',index_col = 0)
 y_test = pd.read_table(os.path.join(label_path, "y_test.csv"), sep = ',',index_col = 0)
 
 
@@ -41,7 +38,7 @@ print(class_size)
 #### select some percentage of samples
 
 train = pd.concat([X_train,y_train], axis=1)
-percentage = 0.2
+percentage = 0.2 ## 20% of labeled data has been used to find the similarity of vectors.
 print("percentage:",percentage)
 n= int(len(y_train) * percentage)
 subset = train.sample(n=n,random_state = 10)
@@ -95,7 +92,7 @@ votes = y_train[I]
 votes_test = y_train[I_test]
 
 
-weight = np.array([0.9893, 0.9718]) ## precompute the weights
+weight = np.array([0.9893, 0.9718]) ## precomputed the weights
 print("weight", weight)
 predictions = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes]
 predictions_test = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes_test]
