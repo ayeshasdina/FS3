@@ -67,24 +67,12 @@ y_valtest = y_valtest.to_numpy().flatten()
 
 neigh = 0
 print("neigh", neigh)
-def transform_pred(y_index, y_truth):
-    # y_truth = y_truth.to_numpy()
-    y_pred = []
-    for i , j in enumerate(y_index[:,neigh]):
-        y_pred.append(y_truth[j])
-    
-    return y_pred  
+ 
 
 d = X_train.shape[1]
 
 index = faiss.IndexFlatL2(d)   # build the index
 ## Using an IVF index
-# nlist = 200
-# quantizer = faiss.IndexFlatL2(d)  # the other index
-# index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_L2)
-# index.nprobe = 150
-# make it into a gpu index
-# gpu_index_flat = faiss.index_cpu_to_gpu(res, 0, index)
 gpu_index_ivf = faiss.index_cpu_to_gpu(res, 0, index)
 
 # assert not gpu_index_ivf.is_trained
@@ -94,16 +82,11 @@ gpu_index_ivf.train(X_train)        # add vectors to the index
 gpu_index_ivf.add(X_train)                  # add vectors to the index
 print(gpu_index_ivf.ntotal)
 
-k = 10
+k = 5 ### number of neighbors
 
 D, I = gpu_index_ivf.search(X_valtest, k)
 D_test, I_test = gpu_index_ivf.search(X_test, k)
 
-y_pred = transform_pred(I_test, y_train)
-report = classification_report(y_test, y_pred, digits=4, output_dict=True)
-report = pd.DataFrame(report).transpose()
-print("top-5",report)
-# report.to_csv("reportminerTab5_top.csv")
 
 
 print(class_size)
