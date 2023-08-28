@@ -19,16 +19,16 @@ from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.metrics import classification_report, confusion_matrix, cohen_kappa_score, matthews_corrcoef
 import faiss 
 
-input_path ="/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/contrastive_learning/random_5/Embedding_Data/Datatabmlp5/"
-label_path = "/project/dmani2_uksr/dina_workplace/wideDeep/Wustl_EHMS/contrastive_learning/random_5/Embedding_Data/Datatabmlp5/"
-### stored embedding
-with open(os.path.join(input_path, "X_trainp2_2.pkl"), "rb") as fh:
+#input_path =""
+label_path = "dataset/" ### according to the file structure
+### open embedded vectors
+with open( "X_trainp2_2.pkl", "rb") as fh:
   X_train = pickle.load(fh)
   
-with open(os.path.join(input_path, "X_valtestp2_2.pkl"), "rb") as fh:
+with open( "X_valtestp2_2.pkl", "rb") as fh:
   X_valtest = pickle.load(fh)
   
-with open(os.path.join(input_path, "X_testp2_2.pkl"), "rb") as fh:
+with open( "X_testp2_2.pkl", "rb") as fh:
   X_test = pickle.load(fh) 
 
 y_train = pd.read_table(os.path.join(label_path, "y_train.csv"), sep = ',',index_col = 0)
