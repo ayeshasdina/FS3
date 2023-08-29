@@ -139,9 +139,9 @@ def load_model():
     X_vec_val = pd.DataFrame.from_records(X_vec_val)
     X_vec_test = pd.DataFrame.from_records(X_vec_test)
     
-    X_vec.to_pickle("X_trainp2_5.pkl")
-    X_vec_val.to_pickle("X_valtestp2_5.pkl")
-    X_vec_test.to_pickle("X_testp2_5.pkl")
+    X_vec.to_pickle("X_trainp2.pkl")
+    X_vec_val.to_pickle("X_valtestp2.pkl")
+    X_vec_test.to_pickle("X_testp2.pkl")
 
     return(X_vec,y_train,X_vec_test,y_test)
 
