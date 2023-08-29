@@ -20,12 +20,12 @@ from sklearn.metrics import classification_report, confusion_matrix, cohen_kappa
 import faiss 
 
 #input_path =""
-label_path = "dataset/" ### according to the file structure
+label_path = "dataset/" ### change according to the file structure
 ### open embedded vectors
-with open( "X_trainp2_2.pkl", "rb") as fh:
+with open( "X_trainp2.pkl", "rb") as fh:
   X_train = pickle.load(fh)
    
-with open( "X_testp2_2.pkl", "rb") as fh:
+with open( "X_testp2.pkl", "rb") as fh:
   X_test = pickle.load(fh) 
 
 y_train = pd.read_table(os.path.join(label_path, "y_train.csv"), sep = ',',index_col = 0)
@@ -38,7 +38,7 @@ print(class_size)
 #### select some percentage of samples
 
 train = pd.concat([X_train,y_train], axis=1)
-percentage = 0.2 ## 20% of labeled data has been used to find the similarity of vectors.
+percentage = 0.2    ## 20% of labeled data has been used to find the similarity of vectors.
 print("percentage:",percentage)
 n= int(len(y_train) * percentage)
 subset = train.sample(n=n,random_state = 10)
@@ -62,10 +62,6 @@ y_train = y_train.to_numpy().flatten()
 y_test = y_test.to_numpy().flatten()
 y_valtest = y_valtest.to_numpy().flatten()
 
-neigh = 0
-print("neigh", neigh)
- 
-
 d = X_train.shape[1]
 
 index = faiss.IndexFlatL2(d)   # build the index
@@ -84,15 +80,13 @@ k = 5 ### number of neighbors
 D, I = gpu_index_ivf.search(X_valtest, k)
 D_test, I_test = gpu_index_ivf.search(X_test, k)
 
-
-
 print(class_size)
 print("K",k)
 votes = y_train[I]
 votes_test = y_train[I_test]
 
 
-weight = np.array([0.9893, 0.9718]) ## precomputed the weights
+weight = np.array([0.9893, 0.9718]) ## precomputed the weights for each class type
 print("weight", weight)
 predictions = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes]
 predictions_test = [np.argmax((np.bincount(x, minlength=2) * weight)) for x in votes_test]
