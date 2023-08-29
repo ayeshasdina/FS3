@@ -9,3 +9,5 @@ A pre-trained model has been included in the "pretrain" folder.
 ## Few-shot learning and contrastive learning: 
 To train the model contrastively using few-shot learning, run "contrastive_learning.py". The user has the flexibility to adjust the number of samples for model training; the default is 5. This implies selecting five samples from each class type to train the model using a contrastive loss function, specifically the Triplet loss function. Setting the margin to 0.1 allows the multi-similarity miner (MSN) to effectively distinguish hard positives and hard negatives within the similarity for an anchor.
 ## Classification using FAISS:
+1. Running embeddingVectors.py to create embedding vectors of all the entries (training dataset and testing dataset)
+2. Finally FAISS.py will provide the classification result.
